@@ -328,10 +328,12 @@ const SKLEP = {
     5: { od: 10, do: 22 },
     6: { od: 10, do: 22 }
   },
-  czasDostawy: "25–40",
-  minZamowienie: 30,
-  kosztDostawy: 6,
-  darmowaDostawaOd: 50,
+  // Dükkan teslimat yapmıyor — sadece yerinde yemek ve gel-al.
+  czasPrzygotowania: "15–20",
+  // Menüde basılı: "OPAKOWANIE NA WYNOS 2 zł" — sadece paket alandan alınır.
+  oplataOpakowanie: 2,
+  // Masaya QR yapıştırılacaksa true. Masa servisi yoksa false yap, alan kaybolur.
+  stoliki: true,
 
   // Müşteri sayfayı hangi dilde görürse görsün, dükkana düşen sipariş mesajı
   // HER ZAMAN bu dilde gelir. Mutfak tek dil okusun diye böyle.
@@ -354,19 +356,18 @@ const T = {
     promo: "Do każdego zamówienia herbata turecka GRATIS!",
     herbataGratis: "Herbata turecka",
     opakowanie: "Opakowanie na wynos",
-    lCzas: "dostawa", lMin: "min. zamówienie", lKoszt: "koszt dostawy", min: "min",
+    lCzas: "przygotowanie", lOdbior: "odbiór osobisty", lOpakowanie: "opakowanie na wynos", min: "min",
     koszyk: "Zobacz koszyk", dodaj: "Dodaj do koszyka", bezOpcji: "Ten produkt nie wymaga wyboru dodatków.",
-    tytul: "Twoje zamówienie", podtytul: "Sprawdź i wyślij — potwierdzimy przez WhatsApp",
+    tytul: "Twoje zamówienie", podtytul: "Sprawdź i wyślij — zamówienie trafi prosto do lokalu",
     pusty: "Koszyk jest pusty.", usun: "usuń",
-    produkty: "Produkty", dostawa: "Dostawa", gratis: "gratis", razem: "Razem",
-    sposob: "Sposób odbioru", odbior: "Odbiór osobisty", odbiorCzas: "15–20 min",
-    fAdres: "Adres dostawy", fAdresP: "ul. Kościuszki 8, Staszów",
+    produkty: "Produkty", gratis: "gratis", razem: "Razem",
+    sposob: "Gdzie zjesz?", naMiejscu: "Na miejscu", naMiejscuOpis: "przy stoliku",
+    naWynos: "Na wynos", naWynosOpis: (k) => `opakowanie +${k} zł`,
+    fStolik: "Numer stolika", fStolikP: "np. 3",
     fImie: "Imię", fImieP: "Jak się do Ciebie zwracać?",
-    fTel: "Telefon", fTelP: "600 100 200",
-    fUwagi: "Uwagi", opcjonalnie: "opcjonalnie", fUwagiP: "np. proszę zadzwonić przed przyjazdem",
-    uzupelnij: "Uzupełnij:", nImie: "imię", nTel: "telefon", nAdres: "adres",
-    minBlad: (k) => `Minimalna wartość zamówienia z dostawą to ${k} zł.`,
-    wyslij: "Zamów przez WhatsApp", platnosc: "Płatność u kuriera lub na miejscu · bez rejestracji",
+    fUwagi: "Uwagi", opcjonalnie: "opcjonalnie", fUwagiP: "np. bez cebuli, poproszę sztućce",
+    uzupelnij: "Uzupełnij:", nImie: "imię",
+    wyslij: "Zamów przez WhatsApp", platnosc: "Płatność przy odbiorze · bez rejestracji",
     zamowienia: () => "Wt–Sb 10:00–22:00 · Nd 12:00–22:00 · Pn nieczynne",
     demo: "Strona demonstracyjna"
   },
@@ -379,19 +380,18 @@ const T = {
     promo: "Free Turkish tea with every order!",
     herbataGratis: "Turkish tea",
     opakowanie: "Takeaway packaging",
-    lCzas: "delivery", lMin: "min. order", lKoszt: "delivery fee", min: "min",
+    lCzas: "preparation", lOdbior: "pick-up", lOpakowanie: "takeaway packaging", min: "min",
     koszyk: "View basket", dodaj: "Add to basket", bezOpcji: "This item has no options to choose.",
-    tytul: "Your order", podtytul: "Check and send — we'll confirm on WhatsApp",
+    tytul: "Your order", podtytul: "Check and send — the order goes straight to the restaurant",
     pusty: "Your basket is empty.", usun: "remove",
-    produkty: "Items", dostawa: "Delivery", gratis: "free", razem: "Total",
-    sposob: "Collection method", odbior: "Pick-up", odbiorCzas: "15–20 min",
-    fAdres: "Delivery address", fAdresP: "ul. Kościuszki 8, Staszów",
+    produkty: "Items", gratis: "free", razem: "Total",
+    sposob: "Where will you eat?", naMiejscu: "Eat in", naMiejscuOpis: "at the table",
+    naWynos: "Takeaway", naWynosOpis: (k) => `packaging +${k} zł`,
+    fStolik: "Table number", fStolikP: "e.g. 3",
     fImie: "Name", fImieP: "What should we call you?",
-    fTel: "Phone", fTelP: "600 100 200",
-    fUwagi: "Notes", opcjonalnie: "optional", fUwagiP: "e.g. please call before arriving",
-    uzupelnij: "Please fill in:", nImie: "name", nTel: "phone", nAdres: "address",
-    minBlad: (k) => `Minimum order for delivery is ${k} zł.`,
-    wyslij: "Order via WhatsApp", platnosc: "Pay the courier or in store · no sign-up",
+    fUwagi: "Notes", opcjonalnie: "optional", fUwagiP: "e.g. no onion, cutlery please",
+    uzupelnij: "Please fill in:", nImie: "name",
+    wyslij: "Order via WhatsApp", platnosc: "Pay on collection · no sign-up",
     zamowienia: () => "Tue–Sat 10:00–22:00 · Sun 12:00–22:00 · Mon closed",
     demo: "Demonstration page"
   },
@@ -404,19 +404,18 @@ const T = {
     promo: "До кожного замовлення турецький чай БЕЗКОШТОВНО!",
     herbataGratis: "Турецький чай",
     opakowanie: "Упаковка на виніс",
-    lCzas: "доставка", lMin: "мін. замовлення", lKoszt: "вартість доставки", min: "хв",
+    lCzas: "приготування", lOdbior: "самовивіз", lOpakowanie: "упаковка на виніс", min: "хв",
     koszyk: "Переглянути кошик", dodaj: "Додати до кошика", bezOpcji: "Цей товар не потребує вибору додатків.",
-    tytul: "Ваше замовлення", podtytul: "Перевірте і надішліть — підтвердимо у WhatsApp",
+    tytul: "Ваше замовлення", podtytul: "Перевірте і надішліть — замовлення піде прямо в заклад",
     pusty: "Кошик порожній.", usun: "видалити",
-    produkty: "Товари", dostawa: "Доставка", gratis: "безкоштовно", razem: "Разом",
-    sposob: "Спосіб отримання", odbior: "Самовивіз", odbiorCzas: "15–20 хв",
-    fAdres: "Адреса доставки", fAdresP: "ul. Kościuszki 8, Staszów",
+    produkty: "Товари", gratis: "безкоштовно", razem: "Разом",
+    sposob: "Де будете їсти?", naMiejscu: "На місці", naMiejscuOpis: "за столиком",
+    naWynos: "На виніс", naWynosOpis: (k) => `упаковка +${k} zł`,
+    fStolik: "Номер столика", fStolikP: "напр. 3",
     fImie: "Ім'я", fImieP: "Як до вас звертатися?",
-    fTel: "Телефон", fTelP: "600 100 200",
-    fUwagi: "Примітки", opcjonalnie: "необов'язково", fUwagiP: "напр. зателефонуйте перед приїздом",
-    uzupelnij: "Заповніть:", nImie: "ім'я", nTel: "телефон", nAdres: "адресу",
-    minBlad: (k) => `Мінімальна сума замовлення з доставкою — ${k} zł.`,
-    wyslij: "Замовити через WhatsApp", platnosc: "Оплата кур'єру або на місці · без реєстрації",
+    fUwagi: "Примітки", opcjonalnie: "необов'язково", fUwagiP: "напр. без цибулі, дайте прибори",
+    uzupelnij: "Заповніть:", nImie: "ім'я",
+    wyslij: "Замовити через WhatsApp", platnosc: "Оплата при отриманні · без реєстрації",
     zamowienia: () => "Вт–Сб 10:00–22:00 · Нд 12:00–22:00 · Пн вихідний",
     demo: "Демонстраційна сторінка"
   },
@@ -429,19 +428,18 @@ const T = {
     promo: "Her siparişte Türk çayı BEDAVA!",
     herbataGratis: "Türk çayı",
     opakowanie: "Paket servis kutusu",
-    lCzas: "teslimat", lMin: "min. sipariş", lKoszt: "teslimat ücreti", min: "dk",
+    lCzas: "hazırlanma", lOdbior: "gel-al", lOpakowanie: "paket kutusu", min: "dk",
     koszyk: "Sepeti gör", dodaj: "Sepete ekle", bezOpcji: "Bu üründe seçilecek bir şey yok.",
-    tytul: "Siparişin", podtytul: "Kontrol et ve gönder — WhatsApp'tan onaylayacağız",
+    tytul: "Siparişin", podtytul: "Kontrol et ve gönder — sipariş doğrudan dükkana gider",
     pusty: "Sepet boş.", usun: "kaldır",
-    produkty: "Ürünler", dostawa: "Teslimat", gratis: "ücretsiz", razem: "Toplam",
-    sposob: "Teslim şekli", odbior: "Gel-al", odbiorCzas: "15–20 dk",
-    fAdres: "Teslimat adresi", fAdresP: "ul. Kościuszki 8, Staszów",
+    produkty: "Ürünler", gratis: "ücretsiz", razem: "Toplam",
+    sposob: "Nerede yiyeceksin?", naMiejscu: "Burada", naMiejscuOpis: "masada",
+    naWynos: "Paket", naWynosOpis: (k) => `kutu +${k} zł`,
+    fStolik: "Masa numarası", fStolikP: "örn. 3",
     fImie: "İsim", fImieP: "Sana nasıl hitap edelim?",
-    fTel: "Telefon", fTelP: "600 100 200",
-    fUwagi: "Not", opcjonalnie: "isteğe bağlı", fUwagiP: "örn. gelmeden önce arayın",
-    uzupelnij: "Lütfen doldur:", nImie: "isim", nTel: "telefon", nAdres: "adres",
-    minBlad: (k) => `Teslimatlı siparişte alt limit ${k} zł.`,
-    wyslij: "WhatsApp'tan sipariş ver", platnosc: "Ödeme kuryeye veya dükkanda · üyelik yok",
+    fUwagi: "Not", opcjonalnie: "isteğe bağlı", fUwagiP: "örn. soğansız olsun, çatal-bıçak ekleyin",
+    uzupelnij: "Lütfen doldur:", nImie: "isim",
+    wyslij: "WhatsApp'tan sipariş ver", platnosc: "Ödeme teslim alırken · üyelik yok",
     zamowienia: () => "Sal–Cmt 10:00–22:00 · Paz 12:00–22:00 · Pzt kapalı",
     demo: "Tanıtım sayfası"
   }
@@ -632,12 +630,12 @@ function naglowek() {
   $('#status').textContent = statusTekst();
   $('#dot').className = 'dot' + (otw ? '' : ' off');
 
-  $('#i-czas').textContent = `${SKLEP.czasDostawy} ${t().min}`;
-  $('#i-min').textContent = SKLEP.minZamowienie + ' zł';
-  $('#i-koszt').textContent = SKLEP.kosztDostawy + ' zł';
+  $('#i-czas').textContent = `${SKLEP.czasPrzygotowania} ${t().min}`;
+  $('#i-min').textContent = SKLEP.adres.split(',')[0];
+  $('#i-koszt').textContent = SKLEP.oplataOpakowanie + ' zł';
   $('#l-czas').textContent = t().lCzas;
-  $('#l-min').textContent = t().lMin;
-  $('#l-koszt').textContent = t().lKoszt;
+  $('#l-min').textContent = t().lOdbior;
+  $('#l-koszt').textContent = t().lOpakowanie;
 
   $('#bar-tekst').textContent = t().koszyk;
   $('#p-dodaj').textContent = t().dodaj;
@@ -796,7 +794,7 @@ function rysujKoszyk() {
   }
 
   const s = suma();
-  const dostawa = s >= SKLEP.darmowaDostawaOd ? 0 : SKLEP.kosztDostawy;
+  const opak = SKLEP.oplataOpakowanie;
 
   $('#k-tresc').innerHTML = `
     ${koszyk.map((x, i) => {
@@ -817,28 +815,25 @@ function rysujKoszyk() {
     <div class="sumy">
       <div><span>${esc(t().produkty)}</span><span>${zl(s)}</span></div>
       <div class="gratis-wiersz"><span>🍵 ${esc(t().herbataGratis)}</span><span>${esc(t().gratis)}</span></div>
-      <div id="w-dostawa"><span>${esc(t().dostawa)}</span><span>${dostawa ? zl(dostawa) : esc(t().gratis)}</span></div>
-      <div class="razem"><span>${esc(t().razem)}</span><span id="w-razem">${zl(s + dostawa)}</span></div>
+      <div id="w-opak" style="display:none"><span>${esc(t().opakowanie)}</span><span>${zl(opak)}</span></div>
+      <div class="razem"><span>${esc(t().razem)}</span><span id="w-razem">${zl(s)}</span></div>
     </div>
 
     <h2 style="margin:24px 0 12px;font-size:1rem">${esc(t().sposob)}</h2>
     <div class="tryb">
-      <label><input type="radio" name="tryb" value="dostawa" checked>${esc(t().dostawa)}<small>${SKLEP.czasDostawy} ${esc(t().min)}</small></label>
-      <label><input type="radio" name="tryb" value="odbior">${esc(t().odbior)}<small>${esc(t().odbiorCzas)}</small></label>
+      <label><input type="radio" name="tryb" value="miejscu" checked>${esc(t().naMiejscu)}<small>${esc(t().naMiejscuOpis)}</small></label>
+      <label><input type="radio" name="tryb" value="wynos">${esc(t().naWynos)}<small>${esc(t().naWynosOpis(opak))}</small></label>
     </div>
 
-    <div id="pola-dostawy">
-      <label class="pole"><span>${esc(t().fAdres)}</span>
-        <input type="text" id="f-adres" placeholder="${esc(t().fAdresP)}"></label>
-    </div>
+    ${SKLEP.stoliki ? `<div id="pola-stolik">
+      <label class="pole"><span>${esc(t().fStolik)} <i>· ${esc(t().opcjonalnie)}</i></span>
+        <input type="text" id="f-stolik" inputmode="numeric" placeholder="${esc(t().fStolikP)}"></label>
+    </div>` : ''}
     <label class="pole"><span>${esc(t().fImie)}</span>
       <input type="text" id="f-imie" placeholder="${esc(t().fImieP)}"></label>
-    <label class="pole"><span>${esc(t().fTel)}</span>
-      <input type="tel" id="f-tel" placeholder="${esc(t().fTelP)}"></label>
     <label class="pole"><span>${esc(t().fUwagi)} <i>· ${esc(t().opcjonalnie)}</i></span>
       <textarea id="f-uwagi" placeholder="${esc(t().fUwagiP)}"></textarea></label>
     <div class="blad" id="blad"></div>
-    ${s < SKLEP.minZamowienie ? `<div class="blad on">${esc(t().minBlad(SKLEP.minZamowienie))}</div>` : ''}
   `;
   $('#k-wyslij').disabled = false;
 }
@@ -854,26 +849,24 @@ $('#k-tresc').addEventListener('click', (e) => {
 
 $('#k-tresc').addEventListener('change', (e) => {
   if (e.target.name !== 'tryb') return;
-  const dostawa = e.target.value === 'dostawa';
-  $('#pola-dostawy').style.display = dostawa ? '' : 'none';
-  const s = suma();
-  const koszt = !dostawa ? 0 : (s >= SKLEP.darmowaDostawaOd ? 0 : SKLEP.kosztDostawy);
-  $('#w-dostawa').style.display = dostawa ? '' : 'none';
-  $('#w-razem').textContent = zl(s + koszt);
+  const wynos = e.target.value === 'wynos';
+  // Kutu ücreti sadece pakette; masa numarası sadece yerinde yemekte anlamlı.
+  const stolik = $('#pola-stolik');
+  if (stolik) stolik.style.display = wynos ? 'none' : '';
+  $('#w-opak').style.display = wynos ? '' : 'none';
+  $('#w-razem').textContent = zl(suma() + (wynos ? SKLEP.oplataOpakowanie : 0));
 });
 
 /* ---- Wysyłka na WhatsApp ---- */
 function budujWiadomosc() {
   const j = SKLEP.jezykZamowienia;   // dükkanın dili — müşterinin dili değil
-  const s = SKLEP.jezykZamowienia && T[j] ? T[j] : T.pl;
-  const tryb = document.querySelector('input[name=tryb]:checked').value;
-  const dostawa = tryb === 'dostawa';
-  const adres = ($('#f-adres')?.value || '').trim();
+  const s = T[j] || T.pl;
+  const wynos = document.querySelector('input[name=tryb]:checked').value === 'wynos';
+  const stolik = ($('#f-stolik')?.value || '').trim();
   const imie = $('#f-imie').value.trim();
-  const tel = $('#f-tel').value.trim();
   const uwagi = $('#f-uwagi').value.trim();
   const kwota = suma();
-  const koszt = dostawa ? (kwota >= SKLEP.darmowaDostawaOd ? 0 : SKLEP.kosztDostawy) : 0;
+  const opak = wynos ? SKLEP.oplataOpakowanie : 0;
 
   return [
     `*${SKLEP.nazwa}*`,
@@ -885,37 +878,28 @@ function budujWiadomosc() {
     '',
     `${s.produkty}: ${zl(kwota)}`,
     `🎁 ${s.herbataGratis}: ${s.gratis}`,
-    dostawa ? `${s.dostawa}: ${koszt ? zl(koszt) : s.gratis}` : s.odbior,
-    `*${s.razem}: ${zl(kwota + koszt)}*`,
+    opak ? `${s.opakowanie}: ${zl(opak)}` : null,
+    `*${s.razem}: ${zl(kwota + opak)}*`,
     '',
-    dostawa ? `📍 ${adres}` : `📍 ${s.odbior}`,
+    wynos ? `🥡 ${s.naWynos}` : `🍽 ${s.naMiejscu}${stolik ? ` — ${s.fStolik}: ${stolik}` : ''}`,
     `👤 ${imie}`,
-    `📞 ${tel}`,
     uwagi ? `📝 ${uwagi}` : null,
     '',
-    // Müşterinin sayfayı hangi dilde kullandığı — dükkan hangi dilde
-    // geri arayacağını bilsin diye.
+    // Müşterinin sayfayı hangi dilde kullandığı — dükkan hangi dilde cevap
+    // vereceğini bilsin diye. Telefon alanı yok: sipariş müşterinin kendi
+    // WhatsApp'ından geldiği için numarası mesajda zaten görünüyor.
     `_${JEZYKI[jezyk]}_`
   ].filter(l => l !== null).join('\n');
 }
 
 $('#k-wyslij').addEventListener('click', () => {
-  const tryb = document.querySelector('input[name=tryb]:checked').value;
-  const dostawa = tryb === 'dostawa';
-  const brak = [];
-  if (!$('#f-imie').value.trim()) brak.push(t().nImie);
-  if (!$('#f-tel').value.trim()) brak.push(t().nTel);
-  if (dostawa && !($('#f-adres')?.value || '').trim()) brak.push(t().nAdres);
-
-  if (brak.length) {
+  if (!$('#f-imie').value.trim()) {
     const b = $('#blad');
-    b.textContent = `${t().uzupelnij} ${brak.join(', ')}`;
+    b.textContent = `${t().uzupelnij} ${t().nImie}`;
     b.classList.add('on');
     b.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
-  if (dostawa && suma() < SKLEP.minZamowienie) return;
-
   window.open(`https://wa.me/${SKLEP.whatsapp}?text=${encodeURIComponent(budujWiadomosc())}`, '_blank');
 });
 
