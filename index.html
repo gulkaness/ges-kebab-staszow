@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GES Kebab &amp; Döner Staszów — zamów online</title>
+<style>
+  :root {
+    --bg: #f4f1ea;
+    --card: #ffffff;
+    --text: #17150f;
+    --muted: #6d675c;
+    --line: #e6e0d4;
+    --brand: #c9a227;
+    --brand-dark: #1a1510;
+    --brand-soft: #f8f1d8;
+    --wa: #1faf54;
+    --shadow: 0 1px 2px rgba(20,18,15,.06), 0 8px 28px rgba(20,18,15,.08);
+    --sheet-shadow: 0 -8px 40px rgba(20,18,15,.18);
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 92px;
+  }
+  .wrap { max-width: 560px; margin: 0 auto; }
+
+  /* ---- Nagłówek ---- */
+  .hero {
+    background:
+      radial-gradient(120% 80% at 100% 0%, rgba(201,162,39,.28), transparent 50%),
+      linear-gradient(165deg, #2a2218 0%, #12100c 100%);
+    color: #fff; padding: 18px 18px 20px; position: relative;
+  }
+  .hero-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+  .demo-tag {
+    background: rgba(201,162,39,.18); border: 1px solid rgba(201,162,39,.45);
+    color: #f3e3a6; font-size: .6rem; font-weight: 800; letter-spacing: .1em; padding: 4px 8px; border-radius: 6px;
+  }
+  .jezyki { display: flex; gap: 4px; }
+  .jezyki button {
+    border: 1px solid rgba(255,255,255,.28); background: rgba(255,255,255,.1); color: #fff;
+    font-family: inherit; font-size: .68rem; font-weight: 800; letter-spacing: .04em;
+    padding: 5px 9px; border-radius: 7px; cursor: pointer;
+  }
+  .jezyki button.on { background: #f3e3a6; color: #1a1510; border-color: #f3e3a6; }
+  .kicker { margin: 0 0 6px; font-size: .68rem; font-weight: 800; letter-spacing: .14em; color: #c9a227; }
+  .hero h1 { margin: 0 0 4px; font-size: 1.48rem; letter-spacing: -.02em; }
+  .slogan { margin: 0 0 8px; font-size: .95rem; font-style: italic; color: #f3e3a6; }
+  .hero .adres { margin: 0; font-size: .88rem; opacity: .88; line-height: 1.45; }
+  .status {
+    display: inline-flex; align-items: center; gap: 6px; margin-top: 12px;
+    background: rgba(255,255,255,.12); padding: 6px 12px; border-radius: 999px;
+    font-size: .8rem; font-weight: 700;
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; }
+  .dot.off { background: #fca5a5; }
+
+  .info {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--line); border-bottom: 1px solid var(--line);
+  }
+  .info div { background: var(--card); padding: 12px 8px; text-align: center; }
+  .info b { display: block; font-size: .92rem; }
+  .info span { font-size: .7rem; color: var(--muted); line-height: 1.3; display: block; }
+
+  /* ---- Kategorie ---- */
+  .promo {
+    background: #f3e3a6; color: #1a1510; text-align: center;
+    font-size: .82rem; font-weight: 800; padding: 10px 14px; letter-spacing: .01em;
+  }
+  nav {
+    position: sticky; top: 0; z-index: 20; background: rgba(244,241,234,.94);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
+    display: flex; gap: 8px; padding: 10px 14px; overflow-x: auto; scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav button {
+    flex: 0 0 auto; border: 1px solid var(--line); background: var(--card);
+    color: var(--muted); font-size: .84rem; font-weight: 700; cursor: pointer;
+    padding: 8px 14px; border-radius: 999px; font-family: inherit;
+  }
+  nav button.on { background: var(--text); color: #fff; border-color: var(--text); }
+
+  /* ---- Menu ---- */
+  main { padding: 8px 14px 20px; }
+  h2 { font-size: 1.08rem; margin: 22px 0 10px; letter-spacing: -.01em; }
+  .poz {
+    display: flex; gap: 12px; align-items: flex-start; width: 100%; text-align: left;
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 14px; margin-bottom: 9px; cursor: pointer; font-family: inherit;
+    box-shadow: var(--shadow); color: inherit;
+  }
+  .poz:active { transform: scale(.99); }
+  .poz-t { flex: 1; min-width: 0; }
+  .poz-t b { display: block; font-size: .98rem; margin-bottom: 3px; }
+  .poz-t p { margin: 0; font-size: .8rem; color: var(--muted); line-height: 1.45; }
+  .cena { font-weight: 800; font-size: .96rem; white-space: nowrap; }
+  .plus {
+    width: 30px; height: 30px; border-radius: 9px; background: var(--brand-soft);
+    color: var(--brand); font-size: 1.2rem; font-weight: 700; display: grid;
+    place-items: center; flex: 0 0 auto; align-self: center;
+  }
+
+  /* ---- Pasek koszyka ---- */
+  .bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+    background: rgba(244,241,234,.92); backdrop-filter: blur(12px);
+    border-top: 1px solid var(--line);
+    transform: translateY(120%); transition: transform .22s ease;
+  }
+  .bar.on { transform: none; }
+  .bar-in { max-width: 560px; margin: 0 auto; }
+  .bar button {
+    width: 100%; border: 0; border-radius: 14px; background: var(--brand-dark); color: #f3e3a6;
+    font-family: inherit; font-size: 1rem; font-weight: 800; padding: 15px 18px;
+    cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    box-shadow: 0 6px 20px rgba(18,16,12,.35);
+  }
+  .lic { background: rgba(255,255,255,.24); border-radius: 8px; padding: 3px 9px; font-size: .85rem; }
+
+  /* ---- Panele ---- */
+  .zaslona {
+    position: fixed; inset: 0; z-index: 40; background: rgba(15,14,12,.5);
+    opacity: 0; pointer-events: none; transition: opacity .22s ease;
+  }
+  .zaslona.on { opacity: 1; pointer-events: auto; }
+  .sheet {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    background: var(--card); border-radius: 22px 22px 0 0; box-shadow: var(--sheet-shadow);
+    max-height: 90vh; display: flex; flex-direction: column;
+    transform: translateY(100%); transition: transform .26s cubic-bezier(.32,.72,0,1);
+  }
+  .sheet.on { transform: none; }
+  .sheet-in { max-width: 560px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; min-height: 0; }
+  .uchwyt { width: 38px; height: 4px; border-radius: 999px; background: var(--line); margin: 10px auto 0; flex: 0 0 auto; }
+  .sheet-h {
+    padding: 14px 18px 10px; border-bottom: 1px solid var(--line); flex: 0 0 auto;
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+  }
+  .sheet-h h3 { margin: 0 0 3px; font-size: 1.15rem; letter-spacing: -.01em; }
+  .sheet-h p { margin: 0; font-size: .82rem; color: var(--muted); line-height: 1.45; }
+  .zamknij {
+    border: 0; background: var(--bg); color: var(--muted); width: 30px; height: 30px;
+    border-radius: 50%; font-size: 1rem; cursor: pointer; flex: 0 0 auto; font-family: inherit;
+  }
+  .sheet-b { padding: 16px 18px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .sheet-f {
+    padding: 14px 18px calc(16px + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--line); flex: 0 0 auto; background: var(--card);
+    border-radius: 0 0 22px 22px;
+  }
+
+  fieldset { border: 0; padding: 0; margin: 0 0 20px; }
+  legend { font-size: .82rem; font-weight: 800; color: var(--muted); margin-bottom: 9px; padding: 0; }
+  legend span { font-weight: 600; }
+  .opt {
+    display: flex; align-items: center; gap: 11px; padding: 11px 13px; cursor: pointer;
+    border: 1px solid var(--line); border-radius: 11px; margin-bottom: 7px; font-size: .92rem;
+  }
+  .opt:has(input:checked) { border-color: var(--brand); background: var(--brand-soft); }
+  .opt input { accent-color: var(--brand); width: 17px; height: 17px; margin: 0; flex: 0 0 auto; }
+  .opt .d { margin-left: auto; font-size: .84rem; color: var(--muted); font-weight: 700; }
+
+  .ilosc { display: flex; align-items: center; gap: 14px; }
+  .ilosc button {
+    width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--line);
+    background: var(--card); font-size: 1.15rem; cursor: pointer; font-family: inherit; color: inherit;
+  }
+  .ilosc b { min-width: 20px; text-align: center; font-size: 1.05rem; }
+
+  .glowny {
+    width: 100%; border: 0; border-radius: 14px; background: var(--brand-dark); color: #f3e3a6;
+    font-family: inherit; font-size: 1rem; font-weight: 800; padding: 15px; cursor: pointer;
+  }
+  .glowny.wa { background: var(--wa); box-shadow: 0 6px 20px rgba(31,175,84,.32); }
+  .glowny:disabled { background: var(--line); color: var(--muted); box-shadow: none; cursor: not-allowed; }
+
+  /* ---- Koszyk ---- */
+  .k-poz { display: flex; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+  .k-poz:last-of-type { border-bottom: 0; }
+  .k-t { flex: 1; min-width: 0; }
+  .k-t b { font-size: .94rem; }
+  .k-t p { margin: 4px 0 0; font-size: .76rem; color: var(--muted); line-height: 1.5; }
+  .k-p { text-align: right; }
+  .k-p b { display: block; font-size: .92rem; white-space: nowrap; }
+  .usun { border: 0; background: none; color: var(--muted); font-size: .74rem; cursor: pointer;
+          text-decoration: underline; padding: 4px 0 0; font-family: inherit; }
+  .sumy { margin-top: 16px; padding-top: 14px; border-top: 2px solid var(--line); font-size: .9rem; }
+  .sumy div { display: flex; justify-content: space-between; padding: 4px 0; color: var(--muted); gap: 12px; }
+  .sumy div.razem { font-size: 1.15rem; font-weight: 800; color: var(--text); padding-top: 9px; }
+
+  .tryb { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+  .tryb label {
+    text-align: center; padding: 13px 8px; border: 1px solid var(--line); border-radius: 12px;
+    cursor: pointer; font-size: .9rem; font-weight: 700;
+  }
+  .tryb label:has(input:checked) { border-color: var(--brand); background: var(--brand-soft); color: var(--brand); }
+  .tryb input { display: none; }
+  .tryb small { display: block; font-weight: 500; color: var(--muted); font-size: .72rem; margin-top: 2px; }
+
+  label.pole { display: block; margin-bottom: 12px; }
+  label.pole span { display: block; font-size: .8rem; font-weight: 700; color: var(--muted); margin-bottom: 5px; }
+  label.pole span i { font-weight: 500; font-style: normal; }
+  input[type=text], input[type=tel], textarea {
+    width: 100%; padding: 12px 13px; font-size: 1rem; font-family: inherit;
+    border: 1px solid var(--line); border-radius: 11px; background: var(--bg); color: var(--text);
+  }
+  input:focus, textarea:focus { outline: none; border-color: var(--brand); background: var(--card); }
+  textarea { resize: vertical; min-height: 62px; }
+  .blad { color: #b3341f; font-size: .8rem; margin: -4px 0 12px; display: none; }
+  .blad.on { display: block; }
+
+  footer { text-align: center; padding: 26px 18px 34px; color: var(--muted); font-size: .76rem; line-height: 1.7; }
+  .pusty { text-align: center; color: var(--muted); padding: 40px 0; font-size: .9rem; }
+  .gratis-wiersz { display: flex; justify-content: space-between; gap: 12px; color: #7a6414; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-top">
+      <div class="demo-tag">DEMO</div>
+      <div class="jezyki" id="jezyki"></div>
+    </div>
+    <p class="kicker" id="kicker"></p>
+    <h1 id="nazwa"></h1>
+    <p class="slogan" id="slogan"></p>
+    <p class="adres" id="adres"></p>
+    <div class="status"><span class="dot" id="dot"></span><span id="status"></span></div>
+  </div>
+
+  <div class="promo" id="promo"></div>
+
+  <div class="info">
+    <div><b id="i-czas"></b><span id="l-czas"></span></div>
+    <div><b id="i-min"></b><span id="l-min"></span></div>
+    <div><b id="i-koszt"></b><span id="l-koszt"></span></div>
+  </div>
+
+  <nav id="nav"></nav>
+  <main id="menu"></main>
+  <footer id="stopka"></footer>
+</div>
+
+<div class="bar" id="bar">
+  <div class="bar-in">
+    <button id="btn-koszyk">
+      <span class="lic" id="bar-lic"></span>
+      <span id="bar-tekst"></span>
+      <span id="bar-suma"></span>
+    </button>
+  </div>
+</div>
+
+<div class="zaslona" id="zaslona"></div>
+
+<div class="sheet" id="sheet-p">
+  <div class="sheet-in">
+    <div class="uchwyt"></div>
+    <div class="sheet-h">
+      <div><h3 id="p-nazwa"></h3><p id="p-opis"></p></div>
+      <button class="zamknij" data-close>✕</button>
+    </div>
+    <div class="sheet-b" id="p-opcje"></div>
+    <div class="sheet-f">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <div class="ilosc">
+          <button type="button" id="p-minus">−</button>
+          <b id="p-ilosc">1</b>
+          <button type="button" id="p-plus">+</button>
+        </div>
+        <b style="font-size:1.15rem" id="p-suma"></b>
+      </div>
+      <button class="glowny" id="p-dodaj"></button>
+    </div>
+  </div>
+</div>
+
+<div class="sheet" id="sheet-k">
+  <div class="sheet-in">
+    <div class="uchwyt"></div>
+    <div class="sheet-h">
+      <div><h3 id="k-tytul"></h3><p id="k-podtytul"></p></div>
+      <button class="zamknij" data-close>✕</button>
+    </div>
+    <div class="sheet-b" id="k-tresc"></div>
+    <div class="sheet-f">
+      <button class="glowny wa" id="k-wyslij"></button>
+      <p style="text-align:center;font-size:.72rem;color:var(--muted);margin:10px 0 0" id="k-stopka"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================================
+   1) DÜKKAN AYARLARI — yeni müşteri için sadece burayı değiştir.
+   ========================================================================= */
+const SKLEP = {
+  nazwa: "GES Kebab & Döner",
+  kicker: { pl: "ORYGINALNY TURECKI", en: "ORIGINAL TURKISH", uk: "ОРИГІНАЛЬНИЙ ТУРЕЦЬКИЙ", tr: "ORİJİNAL TÜRK" },
+  slogan: {
+    pl: "Smak, który pokochasz!",
+    en: "A taste you’ll love!",
+    uk: "Смак, який покохаєш!",
+    tr: "Aşık olacağın lezzet!"
+  },
+  adres: "Rynek 26, 28-200 Staszów",
+  telefon: "510 081 661",
+
+  // ÖNEMLİ: demo gösterirken buraya KENDİ numaranı yaz (ülke kodu + numara, sadece rakam).
+  // Butona basınca senin WhatsApp'ına gerçek, biçimli bir sipariş mesajı düşer.
+  whatsapp: "48507928148",
+
+  // 0=Nd … 6=Sb. Poniedziałek nieczynne.
+  godziny: {
+    0: { od: 12, do: 22 },
+    1: null,
+    2: { od: 10, do: 22 },
+    3: { od: 10, do: 22 },
+    4: { od: 10, do: 22 },
+    5: { od: 10, do: 22 },
+    6: { od: 10, do: 22 }
+  },
+  czasDostawy: "25–40",
+  minZamowienie: 30,
+  kosztDostawy: 6,
+  darmowaDostawaOd: 50,
+
+  // Müşteri sayfayı hangi dilde görürse görsün, dükkana düşen sipariş mesajı
+  // HER ZAMAN bu dilde gelir. Mutfak tek dil okusun diye böyle.
+  // 'pl' | 'tr' | 'en' | 'uk'
+  jezykZamowienia: "pl"
+};
+
+/* =========================================================================
+   2) DİLLER
+   ========================================================================= */
+const JEZYKI = { pl: "PL", en: "EN", uk: "UA", tr: "TR" };
+
+const T = {
+  pl: {
+    otwarte: (g) => `Otwarte teraz · do ${g}:00`,
+    zamkniete: (g) => `Zamknięte · otwieramy o ${g}:00`,
+    nieczynneDzis: "Zamknięte · poniedziałek nieczynny",
+    otworzymy: (dz, g) => `Zamknięte · otwieramy ${dz} o ${g}:00`,
+    dni: ["niedz.","pon.","wt.","śr.","czw.","pt.","sob."],
+    promo: "Do każdego zamówienia herbata turecka GRATIS!",
+    herbataGratis: "Herbata turecka",
+    opakowanie: "Opakowanie na wynos",
+    lCzas: "dostawa", lMin: "min. zamówienie", lKoszt: "koszt dostawy", min: "min",
+    koszyk: "Zobacz koszyk", dodaj: "Dodaj do koszyka", bezOpcji: "Ten produkt nie wymaga wyboru dodatków.",
+    tytul: "Twoje zamówienie", podtytul: "Sprawdź i wyślij — potwierdzimy przez WhatsApp",
+    pusty: "Koszyk jest pusty.", usun: "usuń",
+    produkty: "Produkty", dostawa: "Dostawa", gratis: "gratis", razem: "Razem",
+    sposob: "Sposób odbioru", odbior: "Odbiór osobisty", odbiorCzas: "15–20 min",
+    fAdres: "Adres dostawy", fAdresP: "ul. Kościuszki 8, Staszów",
+    fImie: "Imię", fImieP: "Jak się do Ciebie zwracać?",
+    fTel: "Telefon", fTelP: "600 100 200",
+    fUwagi: "Uwagi", opcjonalnie: "opcjonalnie", fUwagiP: "np. proszę zadzwonić przed przyjazdem",
+    uzupelnij: "Uzupełnij:", nImie: "imię", nTel: "telefon", nAdres: "adres",
+    minBlad: (k) => `Minimalna wartość zamówienia z dostawą to ${k} zł.`,
+    wyslij: "Zamów przez WhatsApp", platnosc: "Płatność u kuriera lub na miejscu · bez rejestracji",
+    zamowienia: () => "Wt–Sb 10:00–22:00 · Nd 12:00–22:00 · Pn nieczynne",
+    demo: "Strona demonstracyjna"
+  },
+  en: {
+    otwarte: (g) => `Open now · until ${g}:00`,
+    zamkniete: (g) => `Closed · we open at ${g}:00`,
+    nieczynneDzis: "Closed · Mondays off",
+    otworzymy: (dz, g) => `Closed · we open ${dz} at ${g}:00`,
+    dni: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
+    promo: "Free Turkish tea with every order!",
+    herbataGratis: "Turkish tea",
+    opakowanie: "Takeaway packaging",
+    lCzas: "delivery", lMin: "min. order", lKoszt: "delivery fee", min: "min",
+    koszyk: "View basket", dodaj: "Add to basket", bezOpcji: "This item has no options to choose.",
+    tytul: "Your order", podtytul: "Check and send — we'll confirm on WhatsApp",
+    pusty: "Your basket is empty.", usun: "remove",
+    produkty: "Items", dostawa: "Delivery", gratis: "free", razem: "Total",
+    sposob: "Collection method", odbior: "Pick-up", odbiorCzas: "15–20 min",
+    fAdres: "Delivery address", fAdresP: "ul. Kościuszki 8, Staszów",
+    fImie: "Name", fImieP: "What should we call you?",
+    fTel: "Phone", fTelP: "600 100 200",
+    fUwagi: "Notes", opcjonalnie: "optional", fUwagiP: "e.g. please call before arriving",
+    uzupelnij: "Please fill in:", nImie: "name", nTel: "phone", nAdres: "address",
+    minBlad: (k) => `Minimum order for delivery is ${k} zł.`,
+    wyslij: "Order via WhatsApp", platnosc: "Pay the courier or in store · no sign-up",
+    zamowienia: () => "Tue–Sat 10:00–22:00 · Sun 12:00–22:00 · Mon closed",
+    demo: "Demonstration page"
+  },
+  uk: {
+    otwarte: (g) => `Зараз відчинено · до ${g}:00`,
+    zamkniete: (g) => `Зачинено · відкриваємо о ${g}:00`,
+    nieczynneDzis: "Зачинено · понеділок вихідний",
+    otworzymy: (dz, g) => `Зачинено · відкриваємо ${dz} о ${g}:00`,
+    dni: ["нд","пн","вт","ср","чт","пт","сб"],
+    promo: "До кожного замовлення турецький чай БЕЗКОШТОВНО!",
+    herbataGratis: "Турецький чай",
+    opakowanie: "Упаковка на виніс",
+    lCzas: "доставка", lMin: "мін. замовлення", lKoszt: "вартість доставки", min: "хв",
+    koszyk: "Переглянути кошик", dodaj: "Додати до кошика", bezOpcji: "Цей товар не потребує вибору додатків.",
+    tytul: "Ваше замовлення", podtytul: "Перевірте і надішліть — підтвердимо у WhatsApp",
+    pusty: "Кошик порожній.", usun: "видалити",
+    produkty: "Товари", dostawa: "Доставка", gratis: "безкоштовно", razem: "Разом",
+    sposob: "Спосіб отримання", odbior: "Самовивіз", odbiorCzas: "15–20 хв",
+    fAdres: "Адреса доставки", fAdresP: "ul. Kościuszki 8, Staszów",
+    fImie: "Ім'я", fImieP: "Як до вас звертатися?",
+    fTel: "Телефон", fTelP: "600 100 200",
+    fUwagi: "Примітки", opcjonalnie: "необов'язково", fUwagiP: "напр. зателефонуйте перед приїздом",
+    uzupelnij: "Заповніть:", nImie: "ім'я", nTel: "телефон", nAdres: "адресу",
+    minBlad: (k) => `Мінімальна сума замовлення з доставкою — ${k} zł.`,
+    wyslij: "Замовити через WhatsApp", platnosc: "Оплата кур'єру або на місці · без реєстрації",
+    zamowienia: () => "Вт–Сб 10:00–22:00 · Нд 12:00–22:00 · Пн вихідний",
+    demo: "Демонстраційна сторінка"
+  },
+  tr: {
+    otwarte: (g) => `Şu an açık · ${g}:00'a kadar`,
+    zamkniete: (g) => `Kapalı · saat ${g}:00'da açılıyoruz`,
+    nieczynneDzis: "Kapalı · pazartesi tatil",
+    otworzymy: (dz, g) => `Kapalı · ${dz} ${g}:00'da açılıyoruz`,
+    dni: ["Paz","Pzt","Sal","Çar","Per","Cum","Cmt"],
+    promo: "Her siparişte Türk çayı BEDAVA!",
+    herbataGratis: "Türk çayı",
+    opakowanie: "Paket servis kutusu",
+    lCzas: "teslimat", lMin: "min. sipariş", lKoszt: "teslimat ücreti", min: "dk",
+    koszyk: "Sepeti gör", dodaj: "Sepete ekle", bezOpcji: "Bu üründe seçilecek bir şey yok.",
+    tytul: "Siparişin", podtytul: "Kontrol et ve gönder — WhatsApp'tan onaylayacağız",
+    pusty: "Sepet boş.", usun: "kaldır",
+    produkty: "Ürünler", dostawa: "Teslimat", gratis: "ücretsiz", razem: "Toplam",
+    sposob: "Teslim şekli", odbior: "Gel-al", odbiorCzas: "15–20 dk",
+    fAdres: "Teslimat adresi", fAdresP: "ul. Kościuszki 8, Staszów",
+    fImie: "İsim", fImieP: "Sana nasıl hitap edelim?",
+    fTel: "Telefon", fTelP: "600 100 200",
+    fUwagi: "Not", opcjonalnie: "isteğe bağlı", fUwagiP: "örn. gelmeden önce arayın",
+    uzupelnij: "Lütfen doldur:", nImie: "isim", nTel: "telefon", nAdres: "adres",
+    minBlad: (k) => `Teslimatlı siparişte alt limit ${k} zł.`,
+    wyslij: "WhatsApp'tan sipariş ver", platnosc: "Ödeme kuryeye veya dükkanda · üyelik yok",
+    zamowienia: () => "Sal–Cmt 10:00–22:00 · Paz 12:00–22:00 · Pzt kapalı",
+    demo: "Tanıtım sayfası"
+  }
+};
+
+/* =========================================================================
+   3) MENÜ — her metin 4 dilde. Fiyat tek, para birimi hep zł.
+   ========================================================================= */
+const MENU = [
+  {
+    kat: { pl: "Kebaby", en: "Kebabs", uk: "Кебаби", tr: "Kebaplar" },
+    produkty: [
+      { n: { pl:"Kebab pita", en:"Kebab pita", uk:"Кебаб у піті", tr:"Pide kebap" },
+        o: { pl:"Kurczak albo wołowina — wybierasz przy zamówieniu. Chrupiąca pita, warzywa, sos", en:"Chicken or beef — you choose when ordering. Crispy pita, vegetables, sauce", uk:"Курка або яловичина — обираєш при замовленні. Хрустка піта, овочі, соус", tr:"Tavuk veya et — siparişte seçilir. Çıtır pide, sebze, sos" },
+        cena: 19, opcje: ["mieso","rozmiar3","sos","bez"] },
+      { n: { pl:"Tortilla", en:"Tortilla wrap", uk:"Тортилья", tr:"Dürüm" },
+        o: { pl:"Kurczak albo wołowina — wybierasz przy zamówieniu. Zawijana w tortillę, grill", en:"Chicken or beef — you choose when ordering. Rolled in a tortilla, grilled", uk:"Курка або яловичина — обираєш при замовленні. У тортильї, на грилі", tr:"Tavuk veya et — siparişte seçilir. Lavaş dürüm, ızgarada" },
+        cena: 19, opcje: ["mieso","rozmiar3","sos","bez"] },
+      { n: { pl:"Kebab w bułce", en:"Kebab in a bun", uk:"Кебаб у булці", tr:"Ekmek arası kebap" },
+        o: { pl:"Kurczak albo wołowina — wybierasz przy zamówieniu. Świeża bułka, warzywa, sos", en:"Chicken or beef — you choose when ordering. Fresh bun, vegetables, sauce", uk:"Курка або яловичина — обираєш при замовленні. Свіжа булка, овочі, соус", tr:"Tavuk veya et — siparişte seçilir. Taze ekmek, sebze, sos" },
+        cena: 23, opcje: ["mieso","rozmiar2","sos","bez"] },
+      { n: { pl:"Kebab box", en:"Kebab box", uk:"Бокс-кебаб", tr:"Kutu kebap" },
+        o: { pl:"Kurczak albo wołowina — wybierasz przy zamówieniu. Frytki i sos w pudełku", en:"Chicken or beef — you choose when ordering. Fries and sauce in a box", uk:"Курка або яловичина — обираєш при замовленні. Картопля фрі і соус у боксі", tr:"Tavuk veya et — siparişte seçilir. Kutuda patates ve sos" },
+        cena: 23, opcje: ["mieso","rozmiar2","sos"] },
+      { n: { pl:"Kebab na talerzu", en:"Kebab plate", uk:"Кебаб на тарілці", tr:"Porsiyon kebap" },
+        o: { pl:"Kurczak albo wołowina — wybierasz przy zamówieniu. Frytki, surówka, sos", en:"Chicken or beef — you choose when ordering. Fries, salad, sauce", uk:"Курка або яловичина — обираєш при замовленні. Картопля фрі, салат, соус", tr:"Tavuk veya et — siparişte seçilir. Patates, salata, sos" },
+        cena: 24, opcje: ["mieso","rozmiarTalerz","sos","bez"] }
+    ]
+  },
+  {
+    kat: { pl: "Przekąski", en: "Sides", uk: "Закуски", tr: "Yan ürünler" },
+    produkty: [
+      { n: { pl:"Nuggetsy + frytki", en:"Nuggets + fries", uk:"Нагетси + картопля фрі", tr:"Nugget + patates" },
+        o: { pl:"Chrupiące nuggetsy z porcją frytek", en:"Crispy nuggets with fries", uk:"Хрусткі нагетси з картоплею фрі", tr:"Çıtır nugget ve patates" },
+        cena: 18, opcje: ["sos"] },
+      { n: { pl:"Frytki", en:"Fries", uk:"Картопля фрі", tr:"Patates kızartması" },
+        o: { pl:"Klasyczne frytki", en:"Classic fries", uk:"Класична картопля фрі", tr:"Klasik patates" },
+        cena: 9, opcje: ["rozmiarFrytki","sos"] },
+      { n: { pl:"Zapiekanka z serem", en:"Toasted baguette with cheese", uk:"Запіканка з сиром", tr:"Peynirli zapiekanka" },
+        o: { pl:"Polska zapiekanka — pieczywo, ser, sos", en:"Polish open baguette with cheese and sauce", uk:"Польська запіканка — хліб, сир, соус", tr:"Polonya usulü peynirli baget" },
+        cena: 14 },
+      { n: { pl:"Zapiekanka z mięsem", en:"Toasted baguette with meat", uk:"Запіканка з м'ясом", tr:"Etli zapiekanka" },
+        o: { pl:"Pieczywo, mięso, ser, sos", en:"Baguette, meat, cheese, sauce", uk:"Хліб, м'ясо, сир, соус", tr:"Baget, et, peynir, sos" },
+        cena: 17, opcje: ["sos"] },
+      { n: { pl:"Opakowanie na wynos", en:"Takeaway packaging", uk:"Упаковка на виніс", tr:"Paket servis kutusu" },
+        o: { pl:"Opłata za opakowanie", en:"Packaging fee", uk:"Оплата за упаковку", tr:"Paket ücreti" },
+        cena: 2 }
+    ]
+  },
+  {
+    kat: { pl: "Napoje", en: "Drinks", uk: "Напої", tr: "İçecekler" },
+    produkty: [
+      { n: { pl:"Coca-Cola 0,25 l", en:"Coca-Cola 0.25 l", uk:"Coca-Cola 0,25 л", tr:"Coca-Cola 0,25 l" }, o: {}, cena: 8 },
+      { n: { pl:"Fanta 0,25 l", en:"Fanta 0.25 l", uk:"Fanta 0,25 л", tr:"Fanta 0,25 l" }, o: {}, cena: 8 },
+      { n: { pl:"Sprite 0,25 l", en:"Sprite 0.25 l", uk:"Sprite 0,25 л", tr:"Sprite 0,25 l" }, o: {}, cena: 8 },
+      { n: { pl:"Ice Tea 0,25 l", en:"Ice Tea 0.25 l", uk:"Ice Tea 0,25 л", tr:"Ice Tea 0,25 l" }, o: {}, cena: 8 },
+      { n: { pl:"Woda gazowana 0,5 l", en:"Sparkling water 0.5 l", uk:"Вода газована 0,5 л", tr:"Gazlı su 0,5 l" },
+        o: { pl:"Woda z gazem", en:"Sparkling / with gas", uk:"З газом", tr:"Gazlı" },
+        cena: 5 },
+      { n: { pl:"Woda niegazowana 0,5 l", en:"Still water 0.5 l", uk:"Вода негазована 0,5 л", tr:"Gazsız su 0,5 l" },
+        o: { pl:"Woda bez gazu", en:"Still / no gas", uk:"Без газу", tr:"Gazsız" },
+        cena: 5 },
+      { n: { pl:"Turecki ayran 0,25 l", en:"Turkish ayran 0.25 l", uk:"Турецький айран 0,25 л", tr:"Türk ayranı 0,25 l" },
+        o: { pl:"Tradycyjny napój jogurtowy", en:"Traditional yoghurt drink", uk:"Традиційний йогуртовий напій", tr:"Geleneksel yoğurt içeceği" },
+        cena: 6 }
+    ]
+  }
+];
+
+const OPCJE = {
+  rozmiar3: {
+    e: { pl:"Rozmiar", en:"Size", uk:"Розмір", tr:"Boyut" }, typ: "radio", wym: true,
+    w: [ { n:{pl:"Mały",en:"Small",uk:"Малий",tr:"Küçük"}, d:0 },
+         { n:{pl:"Średni",en:"Medium",uk:"Середній",tr:"Orta"}, d:4 },
+         { n:{pl:"Mega",en:"Mega",uk:"Мега",tr:"Mega"}, d:9 } ]
+  },
+  rozmiar2: {
+    e: { pl:"Rozmiar", en:"Size", uk:"Розмір", tr:"Boyut" }, typ: "radio", wym: true,
+    w: [ { n:{pl:"Mały",en:"Small",uk:"Малий",tr:"Küçük"}, d:0 },
+         { n:{pl:"Duży",en:"Large",uk:"Великий",tr:"Büyük"}, d:3 } ]
+  },
+  rozmiarTalerz: {
+    e: { pl:"Rozmiar", en:"Size", uk:"Розмір", tr:"Boyut" }, typ: "radio", wym: true,
+    w: [ { n:{pl:"Mały",en:"Small",uk:"Малий",tr:"Küçük"}, d:0 },
+         { n:{pl:"Duży",en:"Large",uk:"Великий",tr:"Büyük"}, d:4 } ]
+  },
+  rozmiarFrytki: {
+    e: { pl:"Rozmiar", en:"Size", uk:"Розмір", tr:"Boyut" }, typ: "radio", wym: true,
+    w: [ { n:{pl:"Mały",en:"Small",uk:"Малий",tr:"Küçük"}, d:0 },
+         { n:{pl:"Duży",en:"Large",uk:"Великий",tr:"Büyük"}, d:3 } ]
+  },
+  mieso: {
+    e: { pl:"Mięso — obowiązkowo wybierz", en:"Meat — please choose", uk:"М'ясо — обов'язково вибери", tr:"Et seçimi — zorunlu" }, typ: "radio", wym: true,
+    w: [ { n:{pl:"Kurczak",en:"Chicken",uk:"Курка",tr:"Tavuk"}, d:0 },
+         { n:{pl:"Wołowina (et)",en:"Beef",uk:"Яловичина",tr:"Et (dana)"}, d:0 },
+         { n:{pl:"Mieszane (kurczak + wołowina)",en:"Mixed (chicken + beef)",uk:"Мікс (курка + яловичина)",tr:"Karışık (tavuk + et)"}, d:0 } ]
+  },
+  sos: {
+    e: { pl:"Sos", en:"Sauce", uk:"Соус", tr:"Sos" }, typ: "radio", wym: true,
+    w: [ { n:{pl:"Łagodny",en:"Mild",uk:"Не гострий",tr:"Acısız"}, d:0 },
+         { n:{pl:"Ostry",en:"Hot",uk:"Гострий",tr:"Acılı"}, d:0 },
+         { n:{pl:"Mieszany",en:"Mixed",uk:"Мікс",tr:"Karışık"}, d:0 },
+         { n:{pl:"Bez sosu",en:"No sauce",uk:"Без соусу",tr:"Sossuz"}, d:0 } ]
+  },
+  bez: {
+    e: { pl:"Bez dodatków", en:"Without", uk:"Без додатків", tr:"İstemediklerim" }, typ: "check", wym: false,
+    przedrostek: { pl:"bez", en:"without", uk:"без", tr:"" }, sufiks: { tr:"istemiyorum" },
+    w: [ { n:{pl:"cebuli",en:"onion",uk:"цибулі",tr:"soğan"}, d:0 },
+         { n:{pl:"kapusty",en:"cabbage",uk:"капусти",tr:"lahana"}, d:0 },
+         { n:{pl:"ogórka",en:"cucumber",uk:"огірка",tr:"salatalık"}, d:0 },
+         { n:{pl:"pomidora",en:"tomato",uk:"помідора",tr:"domates"}, d:0 },
+         { n:{pl:"sałaty",en:"lettuce",uk:"салату",tr:"marul"}, d:0 } ]
+  }
+};
+
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const zl = (n) => n.toFixed(2).replace('.', ',') + ' zł';
+
+let jezyk = 'pl';
+let koszyk = [];      // { n: {pl,en,uk,tr}, opcje: [{kl, wartosci:[{pl,..}]}], cena, ilosc }
+let biezacy = null;
+
+const t = () => T[jezyk];
+// Çok dilli bir metinden istenen dili al; o dil tanımlı değilse Lehçeye düş.
+// Dikkat: boş string geçerli bir çeviridir (örn. Türkçede "bez" öneki yok),
+// o yüzden `||` değil `in` ile kontrol ediyoruz.
+const tx = (obj, j) => {
+  if (!obj) return '';
+  const k = j || jezyk;
+  return k in obj ? obj[k] : (obj.pl || '');
+};
+
+function wykryjJezyk() {
+  try {
+    const zap = localStorage.getItem('jezyk');
+    if (zap && JEZYKI[zap]) return zap;
+  } catch (e) {}
+  const l = (navigator.language || 'pl').toLowerCase();
+  if (l.startsWith('tr')) return 'tr';
+  if (l.startsWith('uk') || l.startsWith('ru')) return 'uk';
+  if (l.startsWith('pl')) return 'pl';
+  return 'en';
+}
+
+function ustawJezyk(j) {
+  jezyk = j;
+  try { localStorage.setItem('jezyk', j); } catch (e) {}
+  document.documentElement.lang = j === 'uk' ? 'uk' : j;
+  document.querySelectorAll('#jezyki button').forEach(b => b.classList.toggle('on', b.dataset.j === j));
+  naglowek();
+  rysujMenu();
+  odswiezPasek();
+  if ($('#sheet-k').classList.contains('on')) rysujKoszyk();
+  if ($('#sheet-p').classList.contains('on')) zamknij();
+}
+
+/* ---- Nagłówek ---- */
+const dzisGodziny = () => SKLEP.godziny[new Date().getDay()];
+const czyOtwarte = () => {
+  const h = dzisGodziny();
+  if (!h) return false;
+  const g = new Date().getHours();
+  return g >= h.od && g < h.do;
+};
+function statusTekst() {
+  if (czyOtwarte()) return t().otwarte(dzisGodziny().do);
+  const now = new Date();
+  const day = now.getDay();
+  const hour = now.getHours();
+  const today = SKLEP.godziny[day];
+  if (today && hour < today.od) return t().zamkniete(today.od);
+  for (let i = 1; i <= 7; i++) {
+    const d = (day + i) % 7;
+    const h = SKLEP.godziny[d];
+    if (h) return t().otworzymy(t().dni[d], h.od);
+  }
+  return t().nieczynneDzis;
+}
+
+function naglowek() {
+  $('#nazwa').textContent = SKLEP.nazwa;
+  $('#kicker').textContent = tx(SKLEP.kicker);
+  $('#slogan').textContent = tx(SKLEP.slogan);
+  $('#adres').textContent = SKLEP.adres;
+  $('#promo').textContent = t().promo;
+  const otw = czyOtwarte();
+  $('#status').textContent = statusTekst();
+  $('#dot').className = 'dot' + (otw ? '' : ' off');
+
+  $('#i-czas').textContent = `${SKLEP.czasDostawy} ${t().min}`;
+  $('#i-min').textContent = SKLEP.minZamowienie + ' zł';
+  $('#i-koszt').textContent = SKLEP.kosztDostawy + ' zł';
+  $('#l-czas').textContent = t().lCzas;
+  $('#l-min').textContent = t().lMin;
+  $('#l-koszt').textContent = t().lKoszt;
+
+  $('#bar-tekst').textContent = t().koszyk;
+  $('#p-dodaj').textContent = t().dodaj;
+  $('#k-tytul').textContent = t().tytul;
+  $('#k-podtytul').textContent = t().podtytul;
+  $('#k-wyslij').textContent = t().wyslij;
+  $('#k-stopka').textContent = t().platnosc;
+
+  $('#stopka').innerHTML =
+    `${esc(SKLEP.nazwa)} · ${esc(SKLEP.adres)}<br>` +
+    `tel. ${esc(SKLEP.telefon)}<br>` +
+    `${esc(t().zamowienia())}<br>` +
+    `<span style="opacity:.7">${esc(t().demo)}</span>`;
+}
+
+/* ---- Menu ---- */
+function rysujMenu() {
+  $('#nav').innerHTML = MENU.map((k, i) =>
+    `<button data-kat="${i}"${i === 0 ? ' class="on"' : ''}>${esc(tx(k.kat))}</button>`).join('');
+
+  $('#menu').innerHTML = MENU.map((k, ki) => `
+    <section id="kat-${ki}">
+      <h2>${esc(tx(k.kat))}</h2>
+      ${k.produkty.map((p, pi) => {
+        const opis = tx(p.o);
+        return `
+        <button class="poz" data-k="${ki}" data-p="${pi}">
+          <div class="poz-t">
+            <b>${esc(tx(p.n))}</b>
+            ${opis ? `<p>${esc(opis)}</p>` : ''}
+          </div>
+          <div class="cena">${zl(p.cena)}</div>
+          <div class="plus">+</div>
+        </button>`;
+      }).join('')}
+    </section>`).join('');
+
+  document.querySelectorAll('#menu section').forEach(s => obs.observe(s));
+}
+
+$('#nav').addEventListener('click', (e) => {
+  const b = e.target.closest('button[data-kat]');
+  if (b) $(`#kat-${b.dataset.kat}`).scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+$('#menu').addEventListener('click', (e) => {
+  const b = e.target.closest('.poz');
+  if (b) otworzProdukt(+b.dataset.k, +b.dataset.p);
+});
+
+const obs = new IntersectionObserver((wpisy) => {
+  wpisy.forEach(w => {
+    if (!w.isIntersecting) return;
+    const i = w.target.id.split('-')[1];
+    document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('on', b.dataset.kat === i));
+  });
+}, { rootMargin: '-64px 0px -70% 0px' });
+
+/* ---- Panel produktu ---- */
+function otworzProdukt(ki, pi) {
+  const p = MENU[ki].produkty[pi];
+  biezacy = { p, ilosc: 1 };
+
+  $('#p-nazwa').textContent = tx(p.n);
+  $('#p-opis').textContent = tx(p.o);
+  $('#p-ilosc').textContent = '1';
+
+  const klucze = p.opcje || [];
+  $('#p-opcje').innerHTML = klucze.length
+    ? klucze.map(kl => {
+        const o = OPCJE[kl];
+        const typ = o.typ === 'check' ? 'checkbox' : 'radio';
+        return `
+          <fieldset data-opcja="${kl}">
+            <legend>${esc(tx(o.e))}${o.wym ? '' : ` <span>· ${esc(t().opcjonalnie)}</span>`}</legend>
+            ${o.w.map((w, wi) => `
+              <label class="opt">
+                <input type="${typ}" name="o-${kl}" value="${wi}" data-d="${w.d}"
+                  ${typ === 'radio' && wi === 0 ? 'checked' : ''}>
+                <span>${esc(tx(w.n))}</span>
+                ${w.d ? `<span class="d">+${zl(w.d)}</span>` : ''}
+              </label>`).join('')}
+          </fieldset>`;
+      }).join('')
+    : `<p style="color:var(--muted);font-size:.88rem;margin:0">${esc(t().bezOpcji)}</p>`;
+
+  przeliczProdukt();
+  otworz('#sheet-p');
+}
+
+// Seçilenleri dilden bağımsız sakla: her seçim çok dilli nesne olarak tutulur,
+// böylece dil değişince sepet de otomatik çevrilir.
+function wybraneOpcje() {
+  const wyb = [];
+  let dod = 0;
+  document.querySelectorAll('#p-opcje fieldset').forEach(fs => {
+    const kl = fs.dataset.opcja;
+    const zazn = [...fs.querySelectorAll('input:checked')];
+    if (!zazn.length) return;
+    zazn.forEach(i => dod += +i.dataset.d);
+    wyb.push({ kl, wartosci: zazn.map(i => OPCJE[kl].w[+i.value].n) });
+  });
+  return { wyb, dod };
+}
+
+// Sepette/mesajda görünecek metin: "Duży · Wołowina · bez cebuli"
+function opisOpcji(opcje, j) {
+  return opcje.map(g => {
+    const o = OPCJE[g.kl];
+    const lista = g.wartosci.map(w => tx(w, j)).join(', ');
+    if (!o.przedrostek) return lista;
+    const przed = tx(o.przedrostek, j);
+    const suf = o.sufiks && o.sufiks[j || jezyk];
+    return [przed, lista, suf].filter(Boolean).join(' ');
+  });
+}
+
+function przeliczProdukt() {
+  const { dod } = wybraneOpcje();
+  $('#p-suma').textContent = zl((biezacy.p.cena + dod) * biezacy.ilosc);
+}
+
+$('#p-opcje').addEventListener('change', przeliczProdukt);
+$('#p-plus').addEventListener('click', () => {
+  biezacy.ilosc = Math.min(biezacy.ilosc + 1, 20);
+  $('#p-ilosc').textContent = biezacy.ilosc;
+  przeliczProdukt();
+});
+$('#p-minus').addEventListener('click', () => {
+  biezacy.ilosc = Math.max(biezacy.ilosc - 1, 1);
+  $('#p-ilosc').textContent = biezacy.ilosc;
+  przeliczProdukt();
+});
+$('#p-dodaj').addEventListener('click', () => {
+  const { wyb, dod } = wybraneOpcje();
+  koszyk.push({ n: biezacy.p.n, opcje: wyb, cena: biezacy.p.cena + dod, ilosc: biezacy.ilosc });
+  zamknij();
+  odswiezPasek();
+});
+
+/* ---- Koszyk ---- */
+const suma = () => koszyk.reduce((s, x) => s + x.cena * x.ilosc, 0);
+const sztuk = () => koszyk.reduce((s, x) => s + x.ilosc, 0);
+
+function odswiezPasek() {
+  $('#bar').classList.toggle('on', koszyk.length > 0);
+  $('#bar-lic').textContent = sztuk();
+  $('#bar-suma').textContent = zl(suma());
+}
+
+function rysujKoszyk() {
+  if (!koszyk.length) {
+    $('#k-tresc').innerHTML = `<div class="pusty">${esc(t().pusty)}</div>`;
+    $('#k-wyslij').disabled = true;
+    return;
+  }
+
+  const s = suma();
+  const dostawa = s >= SKLEP.darmowaDostawaOd ? 0 : SKLEP.kosztDostawy;
+
+  $('#k-tresc').innerHTML = `
+    ${koszyk.map((x, i) => {
+      const op = opisOpcji(x.opcje).join(' · ');
+      return `
+      <div class="k-poz">
+        <div class="k-t">
+          <b>${x.ilosc} × ${esc(tx(x.n))}</b>
+          ${op ? `<p>${esc(op)}</p>` : ''}
+        </div>
+        <div class="k-p">
+          <b>${zl(x.cena * x.ilosc)}</b>
+          <button class="usun" data-usun="${i}">${esc(t().usun)}</button>
+        </div>
+      </div>`;
+    }).join('')}
+
+    <div class="sumy">
+      <div><span>${esc(t().produkty)}</span><span>${zl(s)}</span></div>
+      <div class="gratis-wiersz"><span>🍵 ${esc(t().herbataGratis)}</span><span>${esc(t().gratis)}</span></div>
+      <div id="w-dostawa"><span>${esc(t().dostawa)}</span><span>${dostawa ? zl(dostawa) : esc(t().gratis)}</span></div>
+      <div class="razem"><span>${esc(t().razem)}</span><span id="w-razem">${zl(s + dostawa)}</span></div>
+    </div>
+
+    <h2 style="margin:24px 0 12px;font-size:1rem">${esc(t().sposob)}</h2>
+    <div class="tryb">
+      <label><input type="radio" name="tryb" value="dostawa" checked>${esc(t().dostawa)}<small>${SKLEP.czasDostawy} ${esc(t().min)}</small></label>
+      <label><input type="radio" name="tryb" value="odbior">${esc(t().odbior)}<small>${esc(t().odbiorCzas)}</small></label>
+    </div>
+
+    <div id="pola-dostawy">
+      <label class="pole"><span>${esc(t().fAdres)}</span>
+        <input type="text" id="f-adres" placeholder="${esc(t().fAdresP)}"></label>
+    </div>
+    <label class="pole"><span>${esc(t().fImie)}</span>
+      <input type="text" id="f-imie" placeholder="${esc(t().fImieP)}"></label>
+    <label class="pole"><span>${esc(t().fTel)}</span>
+      <input type="tel" id="f-tel" placeholder="${esc(t().fTelP)}"></label>
+    <label class="pole"><span>${esc(t().fUwagi)} <i>· ${esc(t().opcjonalnie)}</i></span>
+      <textarea id="f-uwagi" placeholder="${esc(t().fUwagiP)}"></textarea></label>
+    <div class="blad" id="blad"></div>
+    ${s < SKLEP.minZamowienie ? `<div class="blad on">${esc(t().minBlad(SKLEP.minZamowienie))}</div>` : ''}
+  `;
+  $('#k-wyslij').disabled = false;
+}
+
+$('#k-tresc').addEventListener('click', (e) => {
+  const u = e.target.closest('[data-usun]');
+  if (!u) return;
+  koszyk.splice(+u.dataset.usun, 1);
+  rysujKoszyk();
+  odswiezPasek();
+  if (!koszyk.length) zamknij();
+});
+
+$('#k-tresc').addEventListener('change', (e) => {
+  if (e.target.name !== 'tryb') return;
+  const dostawa = e.target.value === 'dostawa';
+  $('#pola-dostawy').style.display = dostawa ? '' : 'none';
+  const s = suma();
+  const koszt = !dostawa ? 0 : (s >= SKLEP.darmowaDostawaOd ? 0 : SKLEP.kosztDostawy);
+  $('#w-dostawa').style.display = dostawa ? '' : 'none';
+  $('#w-razem').textContent = zl(s + koszt);
+});
+
+/* ---- Wysyłka na WhatsApp ---- */
+function budujWiadomosc() {
+  const j = SKLEP.jezykZamowienia;   // dükkanın dili — müşterinin dili değil
+  const s = SKLEP.jezykZamowienia && T[j] ? T[j] : T.pl;
+  const tryb = document.querySelector('input[name=tryb]:checked').value;
+  const dostawa = tryb === 'dostawa';
+  const adres = ($('#f-adres')?.value || '').trim();
+  const imie = $('#f-imie').value.trim();
+  const tel = $('#f-tel').value.trim();
+  const uwagi = $('#f-uwagi').value.trim();
+  const kwota = suma();
+  const koszt = dostawa ? (kwota >= SKLEP.darmowaDostawaOd ? 0 : SKLEP.kosztDostawy) : 0;
+
+  return [
+    `*${SKLEP.nazwa}*`,
+    '',
+    ...koszyk.map(x => {
+      const op = opisOpcji(x.opcje, j).join(' · ');
+      return `▸ ${x.ilosc} × ${tx(x.n, j)} — ${zl(x.cena * x.ilosc)}` + (op ? `\n   _${op}_` : '');
+    }),
+    '',
+    `${s.produkty}: ${zl(kwota)}`,
+    `🎁 ${s.herbataGratis}: ${s.gratis}`,
+    dostawa ? `${s.dostawa}: ${koszt ? zl(koszt) : s.gratis}` : s.odbior,
+    `*${s.razem}: ${zl(kwota + koszt)}*`,
+    '',
+    dostawa ? `📍 ${adres}` : `📍 ${s.odbior}`,
+    `👤 ${imie}`,
+    `📞 ${tel}`,
+    uwagi ? `📝 ${uwagi}` : null,
+    '',
+    // Müşterinin sayfayı hangi dilde kullandığı — dükkan hangi dilde
+    // geri arayacağını bilsin diye.
+    `_${JEZYKI[jezyk]}_`
+  ].filter(l => l !== null).join('\n');
+}
+
+$('#k-wyslij').addEventListener('click', () => {
+  const tryb = document.querySelector('input[name=tryb]:checked').value;
+  const dostawa = tryb === 'dostawa';
+  const brak = [];
+  if (!$('#f-imie').value.trim()) brak.push(t().nImie);
+  if (!$('#f-tel').value.trim()) brak.push(t().nTel);
+  if (dostawa && !($('#f-adres')?.value || '').trim()) brak.push(t().nAdres);
+
+  if (brak.length) {
+    const b = $('#blad');
+    b.textContent = `${t().uzupelnij} ${brak.join(', ')}`;
+    b.classList.add('on');
+    b.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  if (dostawa && suma() < SKLEP.minZamowienie) return;
+
+  window.open(`https://wa.me/${SKLEP.whatsapp}?text=${encodeURIComponent(budujWiadomosc())}`, '_blank');
+});
+
+/* ---- Panele ---- */
+function otworz(sel) {
+  $('#zaslona').classList.add('on');
+  $(sel).classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+function zamknij() {
+  $('#zaslona').classList.remove('on');
+  document.querySelectorAll('.sheet').forEach(s => s.classList.remove('on'));
+  document.body.style.overflow = '';
+}
+$('#zaslona').addEventListener('click', zamknij);
+document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', zamknij));
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') zamknij(); });
+$('#btn-koszyk').addEventListener('click', () => { rysujKoszyk(); otworz('#sheet-k'); });
+
+/* ---- Start ---- */
+$('#jezyki').innerHTML = Object.entries(JEZYKI)
+  .map(([k, v]) => `<button data-j="${k}">${v}</button>`).join('');
+$('#jezyki').addEventListener('click', (e) => {
+  const b = e.target.closest('button[data-j]');
+  if (b) ustawJezyk(b.dataset.j);
+});
+
+ustawJezyk(wykryjJezyk());
+odswiezPasek();
+</script>
+</body>
+</html>
